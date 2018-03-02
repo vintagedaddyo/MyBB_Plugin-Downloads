@@ -8,7 +8,7 @@
  *
  * MyBB Version: 1.8
  *
- * Plugin Version: 2.0.2
+ * Plugin Version: 2.0.3
  * 
  */
 
@@ -19,7 +19,7 @@ $l['downloads_plugin_Desc'] = 'Descargas de Archivos.';
 $l['downloads_plugin_Web'] = 'http://community.mybb.com/user-6029.html';
 $l['downloads_plugin_Auth'] = 'Edson Ordaz & updated by Vintagedaddyo';
 $l['downloads_plugin_AuthSite'] = 'http://community.mybb.com/user-6029.html';
-$l['downloads_plugin_Ver'] = '2.0.2';
+$l['downloads_plugin_Ver'] = '2.0.3';
 $l['downloads_plugin_GUID'] = '';
 $l['downloads_plugin_Compat'] = '18*';
  
