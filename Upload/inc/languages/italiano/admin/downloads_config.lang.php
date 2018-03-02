@@ -31,7 +31,7 @@ $l['settingsdownloads'] = "Configurazione";
 //general
 $l['general'] = "Generale";
 $l['activedownloads'] = "Abilitare i download?";
-$l['activedownloadsdes'] = "Selezionare se il plugin sarà attivo per visualizzare i download.";
+$l['activedownloadsdes'] = "Selezionare se il plugin sara attivo per visualizzare i download.";
 $l['createdownsusers'] = "Gli utenti possono creare download?";
 $l['createdownsusersdes'] = "Selezionare se gli utenti possono creare download.";
 $l['validatedownloads'] = "Validare i download?";

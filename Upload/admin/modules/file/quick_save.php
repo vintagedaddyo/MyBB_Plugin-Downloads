@@ -2,9 +2,23 @@
 define("IN_MYBB", 1);
 define("IN_ADMINCP", 1);
 require_once "../../../inc/init.php";
+require_once 'config.php';
 
 if($mybb->request_method != "post") {
 	die("Direct initialization of this file is not allowed.");
+}
+
+if (isset($mybb->cookies['adminsid'])) {
+    $query = $db->simple_select('adminsessions', '*', 'sid="'.$db->escape_string($mybb->cookies['adminsid']).'"');
+    $admin_session = $db->fetch_array($query);
+    if ($admin_session['sid']) {
+        $admin_session['data'] = my_unserialize($admin_session['data']);
+    }
+}
+
+if (!$admin_session || (FILEMANAGER_PASSWORD && (!isset($admin_session['data']['filemanager']) || empty($admin_session['data']['filemanager'])))) {
+    die('Session expired.');
+    exit;
 }
 
 if(!isset($cp_language))
@@ -15,7 +29,6 @@ if(!isset($cp_language))
 	}
 	$lang->set_language($mybb->settings['cplanguage'], "admin");
 }
-
 
 $lang->load("file_manager");
 
