@@ -77,9 +77,13 @@ function downloads_install()
   `downloads` int(10) NOT NULL default '0',
   `urls` int(10) NOT NULL default '0',
   `views` int(10) NOT NULL default '0',
-  `pics` int(10) NOT NULL,
+<<<<<<< HEAD
+  `pics` int(10) NOT NULL default '0',
+=======
+  `pics` int(10) NOT NULL default '',
+>>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
   `active` int(10) NOT NULL,
-  `groups` varchar(220) NOT NULL DEFAULT '',
+  `groups` varchar(220) NOT NULL DEFAULT '0',
   `category` int(20) NOT NULL,
   `bbcode` int(10) NOT NULL default '0',
   `validate` int(10) NOT NULL default '0',
@@ -142,7 +146,7 @@ function downloads_install()
   PRIMARY KEY (`dcid`)
 ) ENGINE=MyISAM;");
 	}
-	
+
 	if(!$db->field_exists("threads", "users"))  
 		$db->add_column("users", "threads", "int(10) unsigned NOT NULL default '0'"); 
 	if(!$db->field_exists("downloads", "users"))  
@@ -416,6 +420,19 @@ function downloads_install()
 		"template"	=> $db->escape_string('<html>
 <head><title>{$lang->downloads}</title>
 {$headerinclude}
+<style>
+.tborder tbody tr:last-child > td:first-child {
+	-moz-border-radius-bottomleft: 0px !important;
+	-webkit-border-bottom-left-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+}
+
+.tborder tbody tr:last-child > td:last-child {
+	-moz-border-radius-bottomright: 0px !important;
+	-webkit-border-bottom-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+</style>
 </head>
 {$header}
 <body>
@@ -442,7 +459,7 @@ function downloads_install()
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -455,7 +472,7 @@ function downloads_install()
 {$lastdownloadbox}
 </tr>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -464,6 +481,19 @@ function downloads_install()
 		"template"	=> $db->escape_string('<html>
 <head><title>{$lang->title_category}</title>
 {$headerinclude}
+<style>
+.tborder tbody tr:last-child > td:first-child {
+	-moz-border-radius-bottomleft: 0px !important;
+	-webkit-border-bottom-left-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+}
+
+.tborder tbody tr:last-child > td:last-child {
+	-moz-border-radius-bottomright: 0px !important;
+	-webkit-border-bottom-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+</style>
 </head>
 {$header}
 <body>
@@ -495,7 +525,7 @@ function downloads_install()
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -509,7 +539,7 @@ function downloads_install()
 <td class="{$color}" width="10%" align="center">{$username}</td>
 </tr></tr>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -525,7 +555,7 @@ function downloads_install()
 <td class="{$color}" width="10%" align="center">{$username}</td>
 </tr>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -554,7 +584,7 @@ function downloads_install()
 </tr>
 <tr>
 <td class="trow1" width="10px"><img src="{$archive[\'image\']}" {$front_width_height}/></td>
-<td class="trow1" valign="top"><font color="blue" size="6"><strong>{$archive[\'name\']}</strong></font>
+<td class="trow1" valign="top"><font color="#0072BF" size="6"><strong>{$archive[\'name\']}</strong></font>
 <br /><span class="smalltext">
 {$lang->date}: {$date} at {$time}
 <br />
@@ -578,11 +608,11 @@ function downloads_install()
 </tr>
 <tr>
 <td colspan="3" class="trow2">
-<strong><font size="5" color="blue">{$lang->description}:</font></strong><br />
+<strong><font size="5" color="#0072BF">{$lang->description}:</font></strong><br />
 {$archive[\'description\']}
 {$screenshots}
 <br /><br /><br />
-<font color="blue" size="5"><strong>{$lang->download}</strong></font>
+<font color="#0072BF" size="5"><strong>{$lang->download}</strong></font>
 <br />
 <div class="postbit_buttons post_management_buttons float_left">
 {$downloadslinks}
@@ -595,7 +625,7 @@ function downloads_install()
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -603,11 +633,11 @@ function downloads_install()
 		"title"		=> 'downloads_archives_screenshots',
 		"template"	=> $db->escape_string('<br />
 <br />
-<font color="blue" size="5"><strong>{$lang->images}</strong></font>
+<font color="#0072BF" size="5"><strong>{$lang->images}</strong></font>
 <br />
 {$images}'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -641,7 +671,7 @@ function downloads_install()
 </form>
 </table>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -663,7 +693,7 @@ function downloads_install()
 {$text}
 </td></tr>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -672,7 +702,7 @@ function downloads_install()
 		"template"	=> $db->escape_string('<br />
 <a href="downloads.php?action=comment&manage=edit&dcid={$comment[\'dcid\']}" /><strong>{$lang->edit}</strong></a> - <a href="downloads.php?action=comment&manage=delete&dcid={$comment[\'dcid\']}" /><strong>{$lang->delete}</strong></a>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -709,7 +739,7 @@ function downloads_install()
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -737,7 +767,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 </body>
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -748,7 +778,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 </div>
 <br />'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -811,7 +841,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -839,7 +869,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -867,7 +897,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 {$footer}
 </html>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -888,7 +918,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 </td>
 </tr>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -899,7 +929,7 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 <td class="{$color}"><input type="text" class="textbox" name="image_{$number}" size="60" maxlength="85" value="{$image}" tabindex="1" /></td>
 </tr>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -913,7 +943,7 @@ by: {$username}
 </span>
 </td>'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	
@@ -922,7 +952,7 @@ by: {$username}
 		"template"	=> $db->escape_string('<a href="downloads.php?download={$link[\'generate\']}" />{$link[\'text\']}</a>
 <br />'),
 		"sid"		=> -1,
-		"version"	=> 1807,
+		"version"	=> 1815,
 		"dateline"	=> TIME_NOW,
 	);
 	

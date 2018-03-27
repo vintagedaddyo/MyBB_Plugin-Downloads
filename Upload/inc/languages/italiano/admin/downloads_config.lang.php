@@ -44,8 +44,8 @@ $l['paginationarchive'] = "File per pagina";
 $l['paginationarchivedes'] = "Inserisci il numero di file da mostrare per pagina nelle sezioni.";
 
 //comments
-$l['canhtmlcomments'] = "Permettere l'HTML?";
-$l['canhtmlcommentsdes'] = "Possono inserire l'HTML nei commenti?";
+$l['canhtmlcomments'] = "Permettere l HTML?";
+$l['canhtmlcommentsdes'] = "Possono inserire l HTML nei commenti?";
 $l['canbbcodecomments'] = "Permettere il BBCode?";
 $l['canbbcodecommentsdes'] = "Possono inserire il BBCode nei commenti?";
 $l['cansmiliescomments'] = "Permettere gli emoticon?";
@@ -54,9 +54,8 @@ $l['canimgcomments'] = "Permettere le immagini?";
 $l['canimgcommentsdes'] = "Possono inserire le immagini nei commenti?";
 $l['canbadwordcomments'] = "Permettere le parole vietate?";
 $l['canbadwordcommentsdes'] = "Possono inserire le parole vietate? (Per vedere le parole vietate vai <a href='index.php?module=config-badwords' />Filtro Parole</a>)";
-$l['showbbcodeeditor'] = "Mostrare l'editor BBCode?";
-$l['showbbcodeeditordes'] = "&#191;Quizás quisiste decir: Pueden ver los botones del editor para poder ingresar codigo BBCode?
-È possibile visualizzare i pulsanti dell'editor per Ingers BBCode?";
+$l['showbbcodeeditor'] = "Mostrare l editor BBCode?";
+$l['showbbcodeeditordes'] = "Quizas quisiste decir: Pueden ver los botones del editor para poder ingresar codigo BBCode? possibile visualizzare i pulsanti dell editor per Ingers BBCode?";
 
 //extras
 $l['extras'] = "Extra";
@@ -75,13 +74,13 @@ $l['timeonlinerequestdes'] = "Inserisci il numero di tempo online richiesto per 
 
 //images
 $l['showportadaincategory'] = "Mostrare il totolo della pagina nella lista dei download?";
-$l['showportadaincategorydes'] = "Scegliere se visualizzare l'immagine di copertina per scaricare l'elenco dei download.";
+$l['showportadaincategorydes'] = "Scegliere se visualizzare l immagine di copertina per scaricare l elenco dei download.";
 $l['maxsizeportadacategory'] = "Misura del titolo delle pagine delle sezioni";
-$l['maxsizeportadacategorydes'] = "Immettere la dimensione delle immagini delle pagine del titolo della categoria SOLO se si è in grado di mostrare l'immagini delle sezioni nell'elecon (separa con una X).";
+$l['maxsizeportadacategorydes'] = "Immettere la dimensione delle immagini delle pagine del titolo della categoria SOLO se si e in grado di mostrare l immagini delle sezioni nell elecon (separa con una X).";
 $l['sizeportada'] = "Dimensione massima del titolo della pagina";
-$l['sizeportadades'] = "Enter the maximum size you should have the title page to see the download. If the size is automatically resized older (separate them with an X).";
+$l['sizeportadades'] = "Inserisci la dimensione massima che dovresti avere nella pagina del titolo per vedere il download. Se la dimensione viene automaticamente ridimensionata piu vecchia (separali con una X).";
 $l['sizeimages'] = "Dimensione massima delle immagini";
-$l['sizeimagesdes'] = "enter the maximum size that should have pictures of any discharge (if any). If the image is automatically resized older (separate them with an X).";
+$l['sizeimagesdes'] = "inserire la dimensione massima che dovrebbe avere le immagini di ogni scarico (se ce ne sono). Se l immagine viene automaticamente ridimensionata piu vecchia (separali con una X).";
 
 //save settings and errors
 $l['successsavesettings'] = "Hai correttamente salvato le impostazioni.";

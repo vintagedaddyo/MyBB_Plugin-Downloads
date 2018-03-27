@@ -110,10 +110,12 @@ elseif($mybb->input['action'] == "details")
 		{
 			$error[] = $lang->portadaempty;
 		}
-		if(strlen($mybb->input['url']) < 5)
-		{
-			$error[] = $lang->urlarchshort;
-		}
+// Disabled because need to fix	related issue
+
+	//	if(strlen($mybb->input['url']) < 5)
+	//	{
+	//		$error[] = $lang->urlarchshort;
+	//	}
 		if(empty($mybb->input['category']))
 		{
 			$error[] = $lang->notcategoryselect;
@@ -134,7 +136,10 @@ elseif($mybb->input['action'] == "details")
 				"image" => $mybb->input['image'],
 				"comments" => intval($mybb->input['comments']),
 				"dateline" => TIME_NOW,
-				"url" => $mybb->input['url'],
+
+			// Disabled because need to fix	related issue
+			//	"url" => $mybb->input['url'],
+
 				"active" => $mybb->input['active'],
 				"groups" => $insert_groups_view,
 				"category" => intval($mybb->input['category'])
@@ -220,7 +225,11 @@ elseif($mybb->input['action'] == "details")
 	$form_container->output_row($lang->description."<em>*</em>",$lang->descriptiondes, $form->generate_text_area('description',$description,array('id' => 'description','class'=>'codepress mybb','style'=>'width:100%;height:200px;')), 'description');
 	$form_container->output_row($lang->portada."<em>*</em>",$lang->portadades, $form->generate_text_box('image',$image, array('id' => 'image')), 'image');
 	$form_container->output_row($lang->comments."<em>*</em>",$lang->commentsdes, $form->generate_yes_no_radio('comments',$comments, array('id' => 'comments')), 'comments');
-	$form_container->output_row($lang->urlarchive."<em>*</em>",$lang->urlarchivedes, $form->generate_text_box('url',$url, array('id' => 'url')), 'url');
+
+// Disabled because need to fix	related issue	
+
+//	$form_container->output_row($lang->urlarchive."<em>*</em>",$lang->urlarchivedes, $form->generate_text_box('url',$url, array('id' => 'url')), 'url');
+
 	$form_container->output_row($lang->orden."<em>*</em>",$lang->ordendes, $form->generate_text_box('orden',$orden, array('id' => 'orden')), 'orden');
 	$form_container->output_row($lang->active."<em>*</em>",$lang->activedes, $form->generate_yes_no_radio('active',$active, array('id' => 'active')), 'active');
 	$form_container->output_row($lang->groupsuser."<em>*</em>",$lang->groupsuserdes, $form->generate_group_select('groups[]',$groups_selected, array('id' => 'groups[]', 'size' => 6, 'multiple' => 'multiple')), 'groups');
