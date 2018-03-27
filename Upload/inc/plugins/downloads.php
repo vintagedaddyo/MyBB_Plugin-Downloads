@@ -77,15 +77,7 @@ function downloads_install()
   `downloads` int(10) NOT NULL default '0',
   `urls` int(10) NOT NULL default '0',
   `views` int(10) NOT NULL default '0',
-<<<<<<< HEAD
-<<<<<<< HEAD
   `pics` int(10) NOT NULL default '0',
-=======
-  `pics` int(10) NOT NULL default '',
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
-=======
-  `pics` int(10) NOT NULL default '',
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
   `active` int(10) NOT NULL,
   `groups` varchar(220) NOT NULL DEFAULT '0',
   `category` int(20) NOT NULL,
