@@ -78,7 +78,11 @@ function downloads_install()
   `urls` int(10) NOT NULL default '0',
   `views` int(10) NOT NULL default '0',
 <<<<<<< HEAD
+<<<<<<< HEAD
   `pics` int(10) NOT NULL default '0',
+=======
+  `pics` int(10) NOT NULL default '',
+>>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
 =======
   `pics` int(10) NOT NULL default '',
 >>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03

@@ -30,6 +30,7 @@ $l['settingsdownloads'] = "Configuration";
 
 //general
 <<<<<<< HEAD
+<<<<<<< HEAD
 $l['general'] = "Général";
 $l['activedownloads'] = "Activer les téléchargements";
 $l['activedownloadsdes'] = "Sélectionnez si le plugin sera actif pour afficher les téléchargements.";
@@ -88,6 +89,8 @@ $l['successsavesettings'] = "Vous avez enregistré les paramètres avec succès.
 $l['notpaginationcat'] = "Vous pouvez laisser vide le numéro de pagination de la catégorie.";
 $l['notpaginationarchive'] = "Vous pouvez laisser vide le nombre de fichiers d'échange.";
 =======
+=======
+>>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
 $l['general'] = "General";
 $l['activedownloads'] = "Enable Downloads";
 $l['activedownloadsdes'] = "Select whether the plugin will be active in order to display the downloads.";
@@ -145,5 +148,8 @@ $l['sizeimagesdes'] = "enter the maximum size that should have pictures of any d
 $l['successsavesettings'] = "You have successfully saved the settings.";
 $l['notpaginationcat'] = "You can leave blank the number of paging the category.";
 $l['notpaginationarchive'] = "You can leave blank the number of paging files.";
+<<<<<<< HEAD
+>>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+=======
 >>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
 ?>
