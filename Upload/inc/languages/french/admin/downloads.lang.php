@@ -13,8 +13,7 @@
  */
  
 $l['downloads'] = "Téléchargements";
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 $l['download'] = "Télécharger";
 $l['editdownloads'] = "Modifier les téléchargements";
 $l['edit'] = "modifier";
@@ -28,9 +27,7 @@ $l['savelinks'] = "Enregistre les liens";
 $l['reset'] = "Réinitialiser";
 $l['notpostcode'] = "Le code de vérification ne correspond pas.";
 $l['manage'] = "Ensemble";
-=======
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 $l['download'] = "Download";
 $l['editdownloads'] = "Edit Downloads";
 $l['edit'] = "Edit";
@@ -44,16 +41,12 @@ $l['savelinks'] = "Saves links";
 $l['reset'] = "Reset";
 $l['notpostcode'] = "The verification code does not match.";
 $l['manage'] = "Set";
-<<<<<<< HEAD
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 
 /****************   downloads.php  **************/
 /************************************************/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 $l['namearchive'] = "Nom du fichier";
 $l['images'] = "Nom du fichier";
 $l['active'] = "actif";
@@ -136,9 +129,7 @@ $l['linksagregesuccess'] = "Les liens ont été ajoutés avec succès.";
 $l['notselectedarchive'] = "Vous n'avez sélectionné aucun fichier pour télécharger des images.";
 $l['imagesof'] = "Images de {1}.";
 $l['linksof'] = "Liens de {1}.";
-=======
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 $l['namearchive'] = "Name of file";
 $l['images'] = "Images";
 $l['active'] = "Active";
@@ -221,17 +212,11 @@ $l['linksagregesuccess'] = "The links have been added successfully.";
 $l['notselectedarchive'] = "You have not selected any files to upload images.";
 $l['imagesof'] = "Images of {1}.";
 $l['linksof'] = "Links of {1}.";
-<<<<<<< HEAD
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
-
 
 
 /*************     Category.php     ***************/
 /**************************************************/
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 $l['categorys'] = "Catégories";
 $l['category'] = "Catégorie";
 $l['ficon'] = "Ficon";
@@ -259,9 +244,7 @@ $l['extnotpermit'] = "L'extension de l'image n'est pas autorisée";
 $l['errorloadimage'] = "Erreur de chargement de l'image";
 $l['ficonused'] = "Réel ficon";
 $l['ficonusednotremplace'] = "Si vous voulez conserver le ficon actuel, laissez l'espace vide ci-dessous.";
-=======
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 $l['categorys'] = "Categories";
 $l['category'] = "Category";
 $l['ficon'] = "Ficon";
@@ -289,16 +272,12 @@ $l['extnotpermit'] = "The extention of the image is not permitted";
 $l['errorloadimage'] = "Error loading image";
 $l['ficonused'] = "Actual ficon";
 $l['ficonusednotremplace'] = "If you want to keep the current ficon leave the blank space below.";
-<<<<<<< HEAD
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 
 /**************    Options.php    ***************/
 /************************************************/
 $l['timeonline'] = "Uptime";
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 $l['editmassive'] = "Édition de masse";
 $l['search'] = "Chercher";
 $l['taboptions1'] = "Vous pouvez trouver toutes les pièces jointes avec des options supplémentaires. Ces options sont pour voir les téléchargements. Vous pouvez le configurer pour avoir le nombre de messages/sujets/réputation/uptime peut voir le téléchargement, si vous le manquez, vous ne verrez pas le téléchargement.";
@@ -371,9 +350,7 @@ $l['successvalidate'] = "Vous avez validé le téléchargement avec succès {1}.
 $l['back'] = "Revenir";
 $l['emptyimagesview'] = "Aucune image dans ce téléchargement.";
 $l['emptylinksview'] = "Il n'y a pas de lien vers ce téléchargement.";
-=======
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 $l['editmassive'] = "Mass edition";
 $l['search'] = "Search";
 $l['taboptions1'] = "You can find all attachments with extra options. These options are to see the downloads. You can configure it to have both number of posts/topics/reputation/uptime can see the download, if you miss it you will not see the download.";
@@ -446,8 +423,5 @@ $l['successvalidate'] = "You have successfully validated the download {1}.";
 $l['back'] = "Return";
 $l['emptyimagesview'] = "No images in this download.";
 $l['emptylinksview'] = "There is no link to this download.";
-<<<<<<< HEAD
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
-=======
->>>>>>> 7be5c303ef8dc86ef6d9d884be60906c288cda03
+
 ?>
