@@ -77,7 +77,7 @@ function downloads_install()
   `downloads` int(10) NOT NULL default '0',
   `urls` int(10) NOT NULL default '0',
   `views` int(10) NOT NULL default '0',
-  `pics` int(10) NOT NULL,
+  `pics` int(10) NOT NULL default '',
   `active` int(10) NOT NULL,
   `groups` varchar(220) NOT NULL DEFAULT '',
   `category` int(20) NOT NULL,
@@ -554,7 +554,7 @@ function downloads_install()
 </tr>
 <tr>
 <td class="trow1" width="10px"><img src="{$archive[\'image\']}" {$front_width_height}/></td>
-<td class="trow1" valign="top"><font color="blue" size="6"><strong>{$archive[\'name\']}</strong></font>
+<td class="trow1" valign="top"><font color="#0072BF" size="6"><strong>{$archive[\'name\']}</strong></font>
 <br /><span class="smalltext">
 {$lang->date}: {$date} at {$time}
 <br />
@@ -578,11 +578,11 @@ function downloads_install()
 </tr>
 <tr>
 <td colspan="3" class="trow2">
-<strong><font size="5" color="blue">{$lang->description}:</font></strong><br />
+<strong><font size="5" color="#0072BF">{$lang->description}:</font></strong><br />
 {$archive[\'description\']}
 {$screenshots}
 <br /><br /><br />
-<font color="blue" size="5"><strong>{$lang->download}</strong></font>
+<font color="#0072BF" size="5"><strong>{$lang->download}</strong></font>
 <br />
 <div class="postbit_buttons post_management_buttons float_left">
 {$downloadslinks}
@@ -603,7 +603,7 @@ function downloads_install()
 		"title"		=> 'downloads_archives_screenshots',
 		"template"	=> $db->escape_string('<br />
 <br />
-<font color="blue" size="5"><strong>{$lang->images}</strong></font>
+<font color="#0072BF" size="5"><strong>{$lang->images}</strong></font>
 <br />
 {$images}'),
 		"sid"		=> -1,
