@@ -191,7 +191,7 @@ elseif($mybb->input['newlinks'])
 				$insert_urls = array(
 					"did" => $did,
 					"dcid" => intval($download['category']),
-					"url" => $db->escape_string($mybb->input['url_'.$i]),
+					"url" => $db->escape_string(htmlspecialchars_uni($mybb->input['url_'.$i])),
 					"text" => $db->escape_string(htmlspecialchars_uni($mybb->input['name_'.$i])),
 					"generate" => random_str(10),
 					"orden" => $i
@@ -241,7 +241,7 @@ elseif($mybb->input['newlinks'])
 			break;
 		}
 		$color = alt_trow();
-		$url .= $mybb->input['url_'.$number];
+		$url .= htmlspecialchars_uni($mybb->input['url_'.$number]);
 		$name .= htmlspecialchars_uni($mybb->input['name_'.$number]);
 		eval("\$linksbox .= \"".$templates->get("downloads_newdownload_addlinks_box")."\";");
 		unset($url);
