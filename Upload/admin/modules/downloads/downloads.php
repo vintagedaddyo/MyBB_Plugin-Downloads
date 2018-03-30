@@ -3,15 +3,15 @@
  * MyBB: Downloads
  *
  * File: downloads.php
- * 
+ *
  * Authors: Vintagedaddyo, Edson Ordaz
  *
  * MyBB Version: 1.8
  *
  * Plugin Version: 2.0.3
- * 
+ *
  */
- 
+
 if(!defined("IN_MYBB"))
 {
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
@@ -28,7 +28,7 @@ elseif($mybb->input['action'] == "images")
 {
 	$query = $db->simple_select("downloads", "*", "did=".$mybb->input['did']);
 	$download = $db->fetch_array($query);
-	$page->add_breadcrumb_item($download['name'], "index.php?module=downloads/archives&action=edit&did=".$mybb->input['did']);
+	$page->add_breadcrumb_item(htmlspecialchars_uni($download['name']), "index.php?module=downloads/archives&action=edit&did=".$mybb->input['did']);
 	$page->add_breadcrumb_item($lang->edit, "index.php?module=downloads/archives&action=edit&did=".$mybb->input['did']);
 	$page->add_breadcrumb_item($lang->editimages);
 }
@@ -36,7 +36,7 @@ elseif($mybb->input['action'] == "links")
 {
 	$query = $db->simple_select("downloads", "*", "did=".$mybb->input['did']);
 	$download = $db->fetch_array($query);
-	$page->add_breadcrumb_item($download['name'], "index.php?module=downloads/archives&action=edit&did=".$mybb->input['did']);
+	$page->add_breadcrumb_item(htmlspecialchars_uni($download['name']), "index.php?module=downloads/archives&action=edit&did=".$mybb->input['did']);
 	$page->add_breadcrumb_item($lang->edit, "index.php?module=downloads/archives&action=edit&did=".$mybb->input['did']);
 	$page->add_breadcrumb_item($lang->editlinks);
 }
@@ -52,7 +52,7 @@ $tabs["new"] = array(
 	'link' => "index.php?module=downloads/archives&amp;action=new",
 	'description' => $lang->tab_down2_des
 );
-	
+
 switch($mybb->input['action'])
 {
 	case 'downloads':
@@ -65,8 +65,8 @@ switch($mybb->input['action'])
 		$page->output_nav_tabs($tabs, 'downloads');
 }
 
-if(!$mybb->input['action'] && !$mybb->input['customimages'] && !$mybb->input['links']) 
-{	
+if(!$mybb->input['action'] && !$mybb->input['customimages'] && !$mybb->input['links'])
+{
 	$queryq = $db->simple_select('downloads_cat', 'COUNT(dcid) AS dids', '', array('limit' => 1));
 	$quantity = $db->fetch_field($queryq, "dids");
 	$pagina = intval($mybb->input['page']);
@@ -95,8 +95,8 @@ if(!$mybb->input['action'] && !$mybb->input['customimages'] && !$mybb->input['li
 	$table->construct_header($lang->orden, array("width" => "10%","class" => "align_center"));
 	$table->construct_header($lang->options, array("width" => "10%","class" => "align_center"));
 	$table->construct_row();
-	
-	
+
+
 	$query = $db->query('SELECT * FROM '.TABLE_PREFIX.'downloads_cat ORDER BY orden ASC LIMIT '.$start.', '.$perpage);
 	while($category = $db->fetch_array($query))
 	{
@@ -118,7 +118,7 @@ if(!$mybb->input['action'] && !$mybb->input['customimages'] && !$mybb->input['li
 				$popup_state = $lang->activar;
 			}
 			$lang->deletepopup = $lang->sprintf($lang->deletepop, $downloads['name']);
-			$table->construct_cell("<a href=\"index.php?module=downloads/archives&action=edit&amp;did=".$downloads['did']."\"><strong>".$downloads[name]."</strong></a>");
+			$table->construct_cell("<a href=\"index.php?module=downloads/archives&action=edit&amp;did=".$downloads['did']."\"><strong>".htmlspecialchars_uni($downloads[name])."</strong></a>");
 			$table->construct_cell($downloads['pics'],array("class" => "align_center"));
 			$table->construct_cell("<a href=\"index.php?module=downloads/archives&action=activate&state=".$mod."&did=".$downloads['did']."&my_post_key={$mybb->post_code}\"><img src=\"styles/default/images/icons/".$state."\" title=\"".$title."\" /></a>",array("class" => "align_center"));
 			$table->construct_cell("<input type=\"text\" value=\"".$downloads['orden']."\" readonly='readonly' class=\"text_input align_center\" style=\"width: 80%; font-weight: bold;\" />", array("class" => "align_center"));
@@ -141,7 +141,7 @@ if(!$mybb->input['action'] && !$mybb->input['customimages'] && !$mybb->input['li
 	}
 	$table->output($lang->downloads);
 	echo multipage($quantity, (int)$perpage, (int)$pagina, $pageurl);
-}	
+}
 elseif($mybb->input['action'] == "delete")
 {
 	$query_diids = $db->query("
@@ -201,7 +201,7 @@ elseif($mybb->input['action'] == "delete")
 			"threads" => intval(--$mybb->user['threads']),
 			"downloads" => intval(--$mybb->user['downloads'])
 		);
-	}	
+	}
 	else
 	{
 		$edit_user = array(
@@ -209,7 +209,7 @@ elseif($mybb->input['action'] == "delete")
 		);
 	}
 	$db->update_query("users", $edit_user,"uid=".$download['uid']);
-	$lang->succesdelete = $lang->sprintf($lang->deletesuccessdownload, $download['name']);
+	$lang->succesdelete = $lang->sprintf($lang->deletesuccessdownload, htmlspecialchars_uni($download['name']));
 	$db->query("DELETE FROM ".TABLE_PREFIX."downloads WHERE did='".intval($mybb->input['did'])."'");
 	$db->free_result($query);
 	flash_message($lang->succesdelete, 'success');
@@ -319,7 +319,7 @@ elseif($mybb->input['action'] == "edit")
 		$select_add = '';
 		if($category['dcid'] == $download['category'])
 		{
-			$select_add = " selected=\"selected\""; 
+			$select_add = " selected=\"selected\"";
 		}
 		$category_select .= "<option value=\"{$category['dcid']}\"{$select_add}>{$category['name']}</option>";
 	}
@@ -328,7 +328,7 @@ elseif($mybb->input['action'] == "edit")
 	$groups_selected = array_map(intval,$groups);
 	$form = new Form("index.php?module=downloads/archives&action=edit", "post");
 	echo $form->generate_hidden_field("did", $download[did]);
-	$form_container = new FormContainer($lang->edit." ".$download['name']);
+	$form_container = new FormContainer($lang->edit." ".htmlspecialchars_uni($download['name']));
 	$form_container->output_row($lang->name."<em>*</em>",$lang->name_des, $form->generate_text_box('name',$name, array('id' => 'name')), 'name');
 	$form_container->output_row($lang->shortdescription."<em>*</em>", $lang->shortdescriptiondes, $form->generate_text_box('shortdesc',$shortdesc,array('id' => 'shortdesc',)), 'shortdesc');
 	$form_container->output_row($lang->description."<em>*</em>",$lang->descriptiondes, $form->generate_text_area('description',$description,array('id' => 'description','class'=>'codepress mybb','style'=>'width:100%;height:200px;')), 'description');
@@ -339,7 +339,7 @@ elseif($mybb->input['action'] == "edit")
 	$form_container->output_row($lang->groupsuser."<em>*</em>",$lang->groupsuserdes, $form->generate_group_select('groups[]',$groups_selected, array('id' => 'groups[]', 'size' => 6, 'multiple' => 'multiple')), 'groups');
 	$form_container->output_row($lang->categorys."<em>*</em>", $lang->categorysdesnew, $category_select);
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->save);
 	$buttons[] = $form->generate_reset_button($lang->reset);
 	$form->output_submit_wrapper($buttons);
@@ -365,7 +365,7 @@ elseif($mybb->input['action'] == "activate")
 	}else{
 		$text = $lang->desactivado;
 	}
-	$lang->deletedownload = $lang->sprintf($lang->deletdownloadssuccess, $text, $download['name']);
+	$lang->deletedownload = $lang->sprintf($lang->deletdownloadssuccess, $text, htmlspecialchars_uni($download['name']));
 	flash_message($lang->deletedownload, 'success');
 	admin_redirect("index.php?module=downloads/archives");
 }
@@ -378,9 +378,9 @@ elseif($mybb->input['action'] == "images")
 	}
 	if($mybb->request_method == "post")
 	{
-		for($i = 1; ; $i++) 
+		for($i = 1; ; $i++)
 		{
-			if($i > intval($mybb->input['images_num'])) 
+			if($i > intval($mybb->input['images_num']))
 			{
 				break;
 			}
@@ -392,9 +392,9 @@ elseif($mybb->input['action'] == "images")
 		}
 		if(!$error)
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if($i > intval($mybb->input['images_num'])) 
+				if($i > intval($mybb->input['images_num']))
 				{
 					break;
 				}
@@ -419,15 +419,15 @@ elseif($mybb->input['action'] == "images")
 	{
 		$page->output_inline_error($error);
 	}
-	$lang->imagesofdownload = $lang->sprintf($lang->imgsofdownload, $download['name']);
+	$lang->imagesofdownload = $lang->sprintf($lang->imgsofdownload, htmlspecialchars_uni($download['name']));
 	$form = new Form("index.php?module=downloads/archives&action=images", "post");
 	echo $form->generate_hidden_field("did", $download['did']);
 	echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 	echo $form->generate_hidden_field("images_num", $num);
 	$form_container = new FormContainer($lang->imagesofdownload);
-	for($i = 1; ; $i++) 
+	for($i = 1; ; $i++)
 	{
-		if ($i > $num) 
+		if ($i > $num)
 		{
 			break;
 		}
@@ -453,9 +453,9 @@ elseif($mybb->input['action'] == "links")
 	}
 	if($mybb->request_method == "post")
 	{
-		for($i = 1; ; $i++) 
+		for($i = 1; ; $i++)
 		{
-			if($i > intval($mybb->input['linksnum'])) 
+			if($i > intval($mybb->input['linksnum']))
 			{
 				break;
 			}
@@ -472,9 +472,9 @@ elseif($mybb->input['action'] == "links")
 		}
 		if(!$error)
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if($i > intval($mybb->input['linksnum'])) 
+				if($i > intval($mybb->input['linksnum']))
 				{
 					break;
 				}
@@ -500,15 +500,15 @@ elseif($mybb->input['action'] == "links")
 	{
 		$page->output_inline_error($error);
 	}
-	$lang->linksofdownloadlan = $lang->sprintf($lang->linksofdownload, $download['name']);
+	$lang->linksofdownloadlan = $lang->sprintf($lang->linksofdownload, htmlspecialchars_uni($download['name']));
 	$form = new Form("index.php?module=downloads/archives&action=links", "post");
 	echo $form->generate_hidden_field("did", $download['did']);
 	echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 	echo $form->generate_hidden_field("linksnum", $links);
 	$form_container = new FormContainer($lang->linksofdownloadlan);
-	for($i = 1; ; $i++) 
+	for($i = 1; ; $i++)
 	{
-		if ($i > $links) 
+		if ($i > $links)
 		{
 			break;
 		}
@@ -551,8 +551,8 @@ elseif($mybb->input['action'] == "deleteimages")
 	flash_message($lang->imagesdeletesuccess, 'success');
 	admin_redirect("index.php?module=downloads/archives");
 }
-elseif($mybb->input['action'] == "new") 
-{	
+elseif($mybb->input['action'] == "new")
+{
 	if($mybb->request_method == "post")
 	{
 		if(strlen($mybb->input['name']) < 2)
@@ -666,19 +666,19 @@ elseif($mybb->input['action'] == "new")
 	$form_container->output_row($lang->images."<em>*</em>",$lang->imagesdesnewarchive, $form->generate_text_box('picks',$mybb->input['picks'], array('id' => 'picks')), 'picks');
 	$form_container->output_row($lang->groupsuser."<em>*</em>", $lang->groupsuserdes, $form->generate_group_select('groups[]','', array('id' => 'groups[]', 'size' => 6, 'multiple' => 'multiple')), 'groups');
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->save);
 	$buttons[] = $form->generate_reset_button($lang->reset);
 	$form->output_submit_wrapper($buttons);
 	$form->end();
-}	
+}
 elseif($mybb->input['links'])
 {
 	if($mybb->request_method == "post")
 	{
-		for($i = 1; ; $i++) 
+		for($i = 1; ; $i++)
 		{
-			if ($i > intval($mybb->input['links'])) 
+			if ($i > intval($mybb->input['links']))
 			{
 				break;
 			}
@@ -695,9 +695,9 @@ elseif($mybb->input['links'])
 		}
 		if(!$error)
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if ($i > intval($mybb->input['links'])) 
+				if ($i > intval($mybb->input['links']))
 				{
 					break;
 				}
@@ -708,7 +708,7 @@ elseif($mybb->input['links'])
 					"text" => $db->escape_string($mybb->input['name_'.$i]),
 					"generate" => random_str(10),
 					"orden" => $i
-				);	
+				);
 				$duid = $db->insert_id();
 				$db->insert_query("downloads_urls", $insert);
 			}
@@ -722,7 +722,7 @@ elseif($mybb->input['links'])
 				admin_redirect("index.php?module=downloads/archives");
 			}
 			else
-			{			
+			{
 				admin_redirect("index.php?module=downloads/archives&customimages=".intval($mybb->input['images'])."&postcode=".$mybb->input['postcode']);
 			}
 		}
@@ -749,18 +749,18 @@ elseif($mybb->input['links'])
 		$mybb->input['newimagesc'] = intval($mybb->input['images']);
 	}
 	$links = intval($mybb->input['links']);
-	$lang->linksofthe = $lang->sprintf($lang->linksof, $download['name']);
+	$lang->linksofthe = $lang->sprintf($lang->linksof, htmlspecialchars_uni($download['name']));
 	$page->add_breadcrumb_item($lang->linksofthe);
 	$form = new Form("index.php?module=downloads/archives&links=".$links."&images=".$mybb->input['newimagesc']."&postcode=".$mybb->input['postcode'], "post");
 	echo $form->generate_hidden_field("postcode", $mybb->post_code);
 	echo $form->generate_hidden_field("links", $links);
 	echo $form->generate_hidden_field("did", $download['did']);
 	echo $form->generate_hidden_field("dcid", $download['category']);
-	$lang->linksofdownloadthe = $lang->sprintf($lang->linksofdownload, $download['name']);
+	$lang->linksofdownloadthe = $lang->sprintf($lang->linksofdownload, htmlspecialchars_uni($download['name']));
 	$form_container = new FormContainer($lang->linksofdownloadthe);
-	for($i = 1; ; $i++) 
+	for($i = 1; ; $i++)
 	{
-		if ($i > $links) 
+		if ($i > $links)
 		{
 			break;
 		}
@@ -768,9 +768,9 @@ elseif($mybb->input['links'])
 		$lang->linknumerdes_byfor_downloads = $lang->sprintf($lang->linknumerdes, $i);
 		$form_container->output_row($lang->linknumer_byfor_downloads,$lang->linknumerdes_byfor_downloads, $lang->namelink."&nbsp;".$form->generate_text_box('name_'.$i,$mybb->input['name_'.$i], array('id' => 'name_'.$i))."<br /><br />&nbsp;&nbsp;".$lang->enlace."&nbsp;".$form->generate_text_box('url_'.$i,$mybb->input['url_'.$i], array('id' => 'url_'.$i)), 'url_'.$i);
 	}
-	
+
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->savelinks);
 	$form->output_submit_wrapper($buttons);
 	$form->end();
@@ -780,9 +780,9 @@ elseif($mybb->input['customimages'])
 {
 	if($mybb->request_method == "post")
 	{
-		for($i = 1; ; $i++) 
+		for($i = 1; ; $i++)
 		{
-			if ($i > intval($mybb->input['num'])) 
+			if ($i > intval($mybb->input['num']))
 			{
 				break;
 			}
@@ -794,9 +794,9 @@ elseif($mybb->input['customimages'])
 		}
 		if(!$error)
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if ($i > intval($mybb->input['num'])) 
+				if ($i > intval($mybb->input['num']))
 				{
 					break;
 				}
@@ -805,7 +805,7 @@ elseif($mybb->input['customimages'])
 					"dcid" => intval($mybb->input['dcid']),
 					"image" => $mybb->input['image_'.$i],
 					"orden" => $i
-				);	
+				);
 				$diid = $db->insert_id();
 				$db->insert_query("downloads_images", $insert);
 			}
@@ -841,18 +841,18 @@ elseif($mybb->input['customimages'])
 		flash_message($lang->mosttenimages, 'error');
 		admin_redirect("index.php?module=downloads/archives");
 	}
-	$lang->imagesofthe = $lang->sprintf($lang->imagesof, $download['name']);
+	$lang->imagesofthe = $lang->sprintf($lang->imagesof, htmlspecialchars_uni($download['name']));
 	$page->add_breadcrumb_item($lang->imagesofthe);
 	$form = new Form("index.php?module=downloads/archives&customimages=".$num, "post");
 	echo $form->generate_hidden_field("postcode", $mybb->post_code);
 	echo $form->generate_hidden_field("num", $num);
 	echo $form->generate_hidden_field("did", $download['did']);
 	echo $form->generate_hidden_field("dcid", $download['category']);
-	$lang->imgssofdownload = $lang->sprintf($lang->imgsofdownload, $download['name']);
+	$lang->imgssofdownload = $lang->sprintf($lang->imgsofdownload, htmlspecialchars_uni($download['name']));
 	$form_container = new FormContainer($lang->imgssofdownload);
-	for($i = 1; ; $i++) 
+	for($i = 1; ; $i++)
 	{
-		if ($i > $num) 
+		if ($i > $num)
 		{
 			break;
 		}
@@ -860,9 +860,9 @@ elseif($mybb->input['customimages'])
 		$lang->imagenumerdes_byfor_downloads = $lang->sprintf($lang->imagenumerdes, $i);
 		$form_container->output_row($lang->imagenumer_byfor_downloads,$lang->imagenumerdes_byfor_downloads, $form->generate_text_box('image_'.$i,$mybb->input['image_'.$i], array('id' => 'image_'.$i)), 'image_'.$i);
 	}
-	
+
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->saveimages);
 	$form->output_submit_wrapper($buttons);
 	$form->end();
