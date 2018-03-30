@@ -340,7 +340,7 @@ elseif($mybb->input['newdownload'])
 				"name" => $db->escape_string(htmlspecialchars_uni($mybb->input['name'])),
 				"orden" => intval(++$orden['orden']),
 				"uid" => intval($mybb->user['uid']),
-				"shortdesc" => $db->escape_string($mybb->input['shortdesc']),
+				"shortdesc" => $db->escape_string(htmlspecialchars_uni($mybb->input['shortdesc'])),
 				"description" => $db->escape_string($mybb->input['description']),
 				"image" => $db->escape_string($mybb->input['image']),
 				"comments" => 1,
@@ -379,7 +379,7 @@ elseif($mybb->input['newdownload'])
 		}
 	}
 	$name = htmlspecialchars_uni($mybb->input['name']);
-	$shortdesc = $mybb->input['shortdesc'];
+	$shortdesc = htmlspecialchars_uni($mybb->input['shortdesc']);
 	$description = $mybb->input['description'];
 	$image = $mybb->input['image'];
 	$url = $mybb->input['url'];
