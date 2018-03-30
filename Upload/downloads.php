@@ -89,7 +89,7 @@ if($mybb->input['newimages'])
 				$insert = array(
 					"did" => $did,
 					"dcid" => intval($archive['category']),
-					"image" => $mybb->input['image_'.$i],
+					"image" => htmlspecialchars_uni($mybb->input['image_'.$i]),
 					"orden" => $i
 				);
 				$diid = $db->insert_id();
@@ -121,7 +121,7 @@ if($mybb->input['newimages'])
 			break;
 		}
 		$color = alt_trow();
-		$image .= $mybb->input['image_'.$number];
+		$image .= htmlspecialchars_uni($mybb->input['image_'.$number]);
 		eval("\$imagesbox .= \"".$templates->get("downloads_newdownload_addimages_box")."\";");
 		unset($image);
 	}
