@@ -3,15 +3,15 @@
  * MyBB: Downloads
  *
  * File: options.php
- * 
+ *
  * Authors: Vintagedaddyo, Edson Ordaz
  *
  * MyBB Version: 1.8
  *
  * Plugin Version: 2.0.3
- * 
+ *
  */
- 
+
 if(!defined("IN_MYBB"))
 {
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
@@ -37,7 +37,7 @@ $tabs["search"] = array(
 	'link' => "index.php?module=downloads/options&amp;action=search",
 	'description' => $lang->taboptions3
 );
-	
+
 switch($mybb->input['action'])
 {
 	case 'options':
@@ -53,8 +53,8 @@ switch($mybb->input['action'])
 		$page->output_nav_tabs($tabs, 'options');
 }
 
-if(!$mybb->input['action']) 
-{	
+if(!$mybb->input['action'])
+{
 	$query = $db->simple_select('downloads', 'COUNT(did) AS dids', '', array('limit' => 1));
 	$quantity = $db->fetch_field($query, "dids");
 	$pagina = intval($mybb->input['page']);
@@ -84,28 +84,28 @@ if(!$mybb->input['action'])
 	$table->construct_header($lang->timeonline, array("width" => "15%","class" => "align_center"));
 	$table->construct_header($lang->options, array("width" => "10%","class" => "align_center"));
 	$table->construct_row();
-	
-	
+
+
 	$query = $db->query('SELECT * FROM '.TABLE_PREFIX.'downloads ORDER BY name ASC LIMIT '.$start.', '.$perpage);
 	while($download = $db->fetch_array($query))
 	{
 		if($download['year'] == 1)
 		{
-			$años = "1 ".$lang->year;
+			$aï¿½os = "1 ".$lang->year;
 		}elseif($download['year'] > 1){
-			$años = $download['year']." ".$lang->years;
+			$aï¿½os = $download['year']." ".$lang->years;
 		}else{
-			$años = "";
+			$aï¿½os = "";
 		}
 		if($download['month'] == 1)
 		{
-			if($años){
+			if($aï¿½os){
 				$meses = ", 1 ".$lang->month;
 			}else{
 				$meses = "1 ".$lang->month;
 			}
 		}elseif($download['month'] > 1){
-			if($años){
+			if($aï¿½os){
 				$meses = ", ".$download['month']." ".$lang->months;
 			}else{
 				$meses = $download['month']." ".$lang->months;
@@ -115,13 +115,13 @@ if(!$mybb->input['action'])
 		}
 		if($download['day'] == 1)
 		{
-			if($años || $meses){
+			if($aï¿½os || $meses){
 				$dias = ", 1 ".$lang->day;
 			}else{
 				$dias = "1 ".$lang->day;
 			}
 		}elseif($download['day'] > 1){
-			if($años || $meses)
+			if($aï¿½os || $meses)
 			{
 				$dias = ", ".$download['day']." ".$lang->days;
 			}else{
@@ -131,15 +131,15 @@ if(!$mybb->input['action'])
 			$dias = "";
 		}
 		if($download['hour'] == 1)
-		{	
-			if($años || $meses || $dias)
+		{
+			if($aï¿½os || $meses || $dias)
 			{
 				$horas = ", 1 ".$lang->hour;
 			}else{
 				$horas = "1 ".$lang->hour;
 			}
 		}elseif($download['hour'] > 1){
-			if($años || $meses || $dias)
+			if($aï¿½os || $meses || $dias)
 			{
 				$horas = ", ".$download['hour']." ".$lang->hours;
 			}else{
@@ -148,15 +148,15 @@ if(!$mybb->input['action'])
 		}else{
 			$horas = "";
 		}
-		if(empty($años) && empty($meses) && empty($dias) && empty($horas))
+		if(empty($aï¿½os) && empty($meses) && empty($dias) && empty($horas))
 		{
-			$años.$meses.$dias.$horas = $lang->none;
+			$aï¿½os.$meses.$dias.$horas = $lang->none;
 		}
-		$table->construct_cell("<a href='index.php?module=downloads/options&action=edit&did={$download['did']}'><strong>".$download['name']."</strong></a>");
+		$table->construct_cell("<a href='index.php?module=downloads/options&action=edit&did={$download['did']}'><strong>".htmlspecialchars_uni($download['name'])."</strong></a>");
 		$table->construct_cell($download['threads'], array("class" => "align_center"));
 		$table->construct_cell($download['posts'], array("class" => "align_center"));
 		$table->construct_cell($download['reputation'], array("class" => "align_center"));
-		$table->construct_cell($años.$meses.$dias.$horas, array("class" => "align_center"));
+		$table->construct_cell($aï¿½os.$meses.$dias.$horas, array("class" => "align_center"));
 		$table->construct_cell("<a href='index.php?module=downloads/options&action=edit&did={$download['did']}'><strong>".$lang->edit."</strong></a>", array('class' => 'align_center'));
 		$table->construct_row();
 	}
@@ -167,7 +167,7 @@ if(!$mybb->input['action'])
 	}
 	$table->output($lang->options);
 	echo multipage($quantity, (int)$perpage, (int)$pagina, $pageurl);
-}	
+}
 elseif($mybb->input['action'] == "edit")
 {
 	if($mybb->request_method == "post")
@@ -176,11 +176,11 @@ elseif($mybb->input['action'] == "edit")
 		{
 			$error[] = $lang->notpostcode;
 		}
-		$años = intval($mybb->input['year']);
+		$aï¿½os = intval($mybb->input['year']);
 		$meses = intval($mybb->input['month']);
 		$dias = intval($mybb->input['day']);
 		$horas = intval($mybb->input['hour']);
-		$time = ($años * 31556952) + ($meses * 2551443) + ($dias * 86400) + ($horas * 3600);
+		$time = ($aï¿½os * 31556952) + ($meses * 2551443) + ($dias * 86400) + ($horas * 3600);
 		if($time < 0)
 		{
 			$error[] = $lang->notdatepast;
@@ -195,7 +195,7 @@ elseif($mybb->input['action'] == "edit")
 				"hour" => $horas,
 				"day" => $dias,
 				"month" => $meses,
-				"year" => $años
+				"year" => $aï¿½os
 			);
 			$db->update_query("downloads", $edit_update,"did=".$mybb->input['did']);
 			flash_message($lang->successoptionsmore, 'success');
@@ -211,14 +211,14 @@ elseif($mybb->input['action'] == "edit")
 	$form = new Form("index.php?module=downloads/options&amp;action=edit", "post");
 	echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 	echo $form->generate_hidden_field("did", $download['did']);
-	$form_container = new FormContainer($download['name']);
+	$form_container = new FormContainer(htmlspecialchars_uni($download['name']));
 	$form_container->output_row($lang->threadsform."<em>*</em>",$lang->threadsformdes, $form->generate_text_box('threads',$download['threads'], array('id' => 'threads')), 'threads');
 	$form_container->output_row($lang->postsform."<em>*</em>",$lang->postsformdes, $form->generate_text_box('posts',$download['posts'], array('id' => 'posts')), 'posts');
 	$form_container->output_row($lang->reputationform."<em>*</em>",$lang->reputationformdes, $form->generate_text_box('reputation',$download['reputation'], array('id' => 'reputation')), 'reputation');
 	//$form_container->output_row($lang->timeonline."<em>*</em>",$lang->timeonlinedes, $form->generate_text_box('timeonline',$download['timeonline'], array('id' => 'timeonline')), 'timeonline');
 	$form_container->output_row($lang->timeonlineform."<em>*</em>",$lang->timeonlinedes, $lang->hours.": ".$form->generate_text_box('hour',$download['hour'], array('id' => 'hour', 'style' => 'width: 60px;'))." ".$lang->days.": ".$form->generate_text_box('day',$download['day'], array('id' => 'day', 'style' => 'width: 60px;'))." ".$lang->months.": ".$form->generate_text_box('month',$download['month'], array('id' => 'month', 'style' => 'width: 60px;'))."  ".$lang->years.": ".$form->generate_text_box('year',$download['year'], array('id' => 'year', 'style' => 'width: 60px;')), 'timeonline');
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->save);
 	$buttons[] = $form->generate_reset_button($lang->reset);
 	$form->output_submit_wrapper($buttons);
@@ -232,11 +232,11 @@ elseif($mybb->input['action'] == "editmassive")
 		{
 			$error[] = $lang->notpostcode;
 		}
-		$años = intval($mybb->input['year']);
+		$aï¿½os = intval($mybb->input['year']);
 		$meses = intval($mybb->input['month']);
 		$dias = intval($mybb->input['day']);
 		$horas = intval($mybb->input['hour']);
-		$time = ($años * 31556952) + ($meses * 2551443) + ($dias * 86400) + ($horas * 3600);
+		$time = ($aï¿½os * 31556952) + ($meses * 2551443) + ($dias * 86400) + ($horas * 3600);
 		if($time < 0)
 		{
 			$error[] = $lang->notdatepast;
@@ -257,7 +257,7 @@ elseif($mybb->input['action'] == "editmassive")
 					"hour" => $horas,
 					"day" => $dias,
 					"month" => $meses,
-					"year" => $años
+					"year" => $aï¿½os
 				);
 				$db->update_query("downloads", $insert_massive);
 				flash_message($lang->successmassiveall, 'success');
@@ -275,7 +275,7 @@ elseif($mybb->input['action'] == "editmassive")
 						"hour" => $horas,
 						"day" => $dias,
 						"month" => $meses,
-						"year" => $años
+						"year" => $aï¿½os
 					);
 					$query_category = $db->simple_select("downloads_cat", "*", "dcid='".intval($id_category)."'");
 					$category = $db->fetch_array($query_category);
@@ -310,7 +310,7 @@ elseif($mybb->input['action'] == "editmassive")
 	$form_container->output_row($lang->timeonlineform."<em>*</em>",$lang->timeonlinedes, $lang->hours.": ".$form->generate_text_box('hour',$download['hour'], array('id' => 'hour', 'style' => 'width: 60px;'))." ".$lang->days.": ".$form->generate_text_box('day',$download['day'], array('id' => 'day', 'style' => 'width: 60px;'))." ".$lang->months.": ".$form->generate_text_box('month',$download['month'], array('id' => 'month', 'style' => 'width: 60px;'))."  ".$lang->years.": ".$form->generate_text_box('year',$download['year'], array('id' => 'year', 'style' => 'width: 60px;')), 'timeonline');
 	$form_container->output_row($lang->category."<em>*</em>",$lang->categoryeditmassive, $category_select);
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->save);
 	$buttons[] = $form->generate_reset_button($lang->reset);
 	$form->output_submit_wrapper($buttons);
@@ -353,7 +353,7 @@ elseif($mybb->input['action'] == "search")
 				$implode_names = implode(", ",$namescategoryssearchs);
 				$lang->searchbysearch = $lang->sprintf($lang->searchcategorysby, $implode_names);
 			}
-			
+
 			$page->output_success($lang->searchbysearch);
 			$table = new Table;
 			$table->construct_header($lang->namearchive);
@@ -363,27 +363,27 @@ elseif($mybb->input['action'] == "search")
 			$table->construct_header($lang->timeonline, array("width" => "15%","class" => "align_center"));
 			$table->construct_header($lang->options, array("width" => "10%","class" => "align_center"));
 			$table->construct_row();
-			
+
 			$query = $db->simple_select('downloads', '*', 'name LIKE "%'.$mybb->input['text'].'%"'.$category_search.'', array('order_by' => 'name', 'order_dir' => 'ASC'));
 			while($download = $db->fetch_array($query))
 			{
 				if($download['year'] == 1)
 				{
-					$años = "1 ".$lang->year;
+					$aï¿½os = "1 ".$lang->year;
 				}elseif($download['year'] > 1){
-					$años = $download['year']." ".$lang->years;
+					$aï¿½os = $download['year']." ".$lang->years;
 				}else{
-					$años = "";
+					$aï¿½os = "";
 				}
 				if($download['month'] == 1)
 				{
-					if($años){
+					if($aï¿½os){
 						$meses = ", 1 ".$lang->month;
 					}else{
 						$meses = "1 ".$lang->month;
 					}
 				}elseif($download['month'] > 1){
-					if($años){
+					if($aï¿½os){
 						$meses = ", ".$download['month']." ".$lang->months;
 					}else{
 						$meses = $download['month']." ".$lang->months;
@@ -393,13 +393,13 @@ elseif($mybb->input['action'] == "search")
 				}
 				if($download['day'] == 1)
 				{
-					if($años || $meses){
+					if($aï¿½os || $meses){
 						$dias = ", 1 ".$lang->day;
 					}else{
 						$dias = "1 ".$lang->day;
 					}
 				}elseif($download['day'] > 1){
-					if($años || $meses)
+					if($aï¿½os || $meses)
 					{
 						$dias = ", ".$download['day']." ".$lang->days;
 					}else{
@@ -409,15 +409,15 @@ elseif($mybb->input['action'] == "search")
 					$dias = "";
 				}
 				if($download['hour'] == 1)
-				{	
-					if($años || $meses || $dias)
+				{
+					if($aï¿½os || $meses || $dias)
 					{
 						$horas = ", 1 ".$lang->hour;
 					}else{
 						$horas = "1 ".$lang->hour;
 					}
 				}elseif($download['hour'] > 1){
-					if($años || $meses || $dias)
+					if($aï¿½os || $meses || $dias)
 					{
 						$horas = ", ".$download['hour']." ".$lang->hours;
 					}else{
@@ -426,16 +426,16 @@ elseif($mybb->input['action'] == "search")
 				}else{
 					$horas = "";
 				}
-				if(empty($años) && empty($meses) && empty($dias) && empty($horas))
+				if(empty($aï¿½os) && empty($meses) && empty($dias) && empty($horas))
 				{
-					$años.$meses.$dias.$horas = $lang->none;
-				} 
+					$aï¿½os.$meses.$dias.$horas = $lang->none;
+				}
 				$download['name'] = str_replace($mybb->input['text'],"<strong><span style='BACKGROUND-COLOR: cyan'><font color='red'>{$mybb->input['text']}</font></span></strong>",$download['name']);
-				$table->construct_cell("<a href='index.php?module=downloads/options&action=edit&did={$download['did']}'><strong>".$download['name']."</strong></a>");
+				$table->construct_cell("<a href='index.php?module=downloads/options&action=edit&did={$download['did']}'><strong>".htmlspecialchars_uni($download['name'])."</strong></a>");
 				$table->construct_cell($download['threads'], array("class" => "align_center"));
 				$table->construct_cell($download['posts'], array("class" => "align_center"));
 				$table->construct_cell($download['reputation'], array("class" => "align_center"));
-				$table->construct_cell($años.$meses.$dias.$horas, array("class" => "align_center"));
+				$table->construct_cell($aï¿½os.$meses.$dias.$horas, array("class" => "align_center"));
 				$table->construct_cell("<a href='index.php?module=downloads/options&action=edit&did={$download['did']}'><strong>".$lang->edit."</strong></a>", array('class' => 'align_center'));
 				$table->construct_row();
 			}
@@ -467,7 +467,7 @@ elseif($mybb->input['action'] == "search")
 	$form_container->output_row($lang->name."<em>*</em>",$lang->namedownloadsearch, $form->generate_text_box('text',$mybb->input['text'], array('id' => 'text')), 'text');
 	$form_container->output_row($lang->category."<em>*</em>",$lang->categorysearchtext, $category_select);
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->search);
 	$form->output_submit_wrapper($buttons);
 	$form->end();

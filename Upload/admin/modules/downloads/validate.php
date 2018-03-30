@@ -3,15 +3,15 @@
  * MyBB: Downloads
  *
  * File: validate.php
- * 
+ *
  * Authors: Vintagedaddyo, Edson Ordaz
  *
  * MyBB Version: 1.8
  *
  * Plugin Version: 2.0.3
- * 
+ *
  */
- 
+
 if(!defined("IN_MYBB"))
 {
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
@@ -60,7 +60,7 @@ if(!$mybb->input['action'])
 	$table->construct_header($lang->orden, array("width" => "10%","class" => "align_center"));
 	$table->construct_header($lang->options, array("width" => "10%","class" => "align_center"));
 	$table->construct_row();
-	
+
 	$query1 = $db->simple_select("downloads", "*", "validate='1'",array('order_by' => 'orden', 'order_dir' => 'ASC', 'limit' => $start.','.$perpage));
 	while($downloads = $db->fetch_array($query1))
 	{
@@ -68,7 +68,7 @@ if(!$mybb->input['action'])
 		$user = get_user($downloads['uid']);
 		$username = format_name($user['username'], $user['usergroup'], $user['displaygroup']);
 		$username = build_profile_link($username, $user['uid'], "_blank");
-		$table->construct_cell("<a href=\"index.php?module=downloads/validate&action=details&amp;did=".$downloads['did']."\"><strong>".$downloads[name]."</strong></a>");
+		$table->construct_cell("<a href=\"index.php?module=downloads/validate&action=details&amp;did=".$downloads['did']."\"><strong>".htmlspecialchars_uni($downloads[name])."</strong></a>");
 		$table->construct_cell($username,array("class" => "align_center"));
 		$table->construct_cell($downloads['pics'],array("class" => "align_center"));
 		$table->construct_cell("<input type=\"text\" value=\"".$downloads['orden']."\" readonly='readonly' class=\"text_input align_center\" style=\"width: 80%; font-weight: bold;\" />", array("class" => "align_center"));
@@ -210,7 +210,7 @@ elseif($mybb->input['action'] == "details")
 		$select_add = '';
 		if($category['dcid'] == $download['category'])
 		{
-			$select_add = " selected=\"selected\""; 
+			$select_add = " selected=\"selected\"";
 		}
 		$category_select .= "<option value=\"{$category['dcid']}\"{$select_add}>{$category['name']}</option>";
 	}
@@ -219,14 +219,14 @@ elseif($mybb->input['action'] == "details")
 	$groups_selected = array_map(intval,$groups);
 	$form = new Form("index.php?module=downloads/validate&action=details", "post");
 	echo $form->generate_hidden_field("did", $download[did]);
-	$form_container = new FormContainer($lang->edit." ".$download['name']);
+	$form_container = new FormContainer($lang->edit." ".htmlspecialchars_uni($download['name']));
 	$form_container->output_row($lang->name."<em>*</em>",$lang->name_des, $form->generate_text_box('name',$name, array('id' => 'name')), 'name');
 	$form_container->output_row($lang->shortdescription."<em>*</em>", $lang->shortdescriptiondes, $form->generate_text_box('shortdesc',$shortdesc,array('id' => 'shortdesc',)), 'shortdesc');
 	$form_container->output_row($lang->description."<em>*</em>",$lang->descriptiondes, $form->generate_text_area('description',$description,array('id' => 'description','class'=>'codepress mybb','style'=>'width:100%;height:200px;')), 'description');
 	$form_container->output_row($lang->portada."<em>*</em>",$lang->portadades, $form->generate_text_box('image',$image, array('id' => 'image')), 'image');
 	$form_container->output_row($lang->comments."<em>*</em>",$lang->commentsdes, $form->generate_yes_no_radio('comments',$comments, array('id' => 'comments')), 'comments');
 
-// Disabled because need to fix	related issue	
+// Disabled because need to fix	related issue
 
 //	$form_container->output_row($lang->urlarchive."<em>*</em>",$lang->urlarchivedes, $form->generate_text_box('url',$url, array('id' => 'url')), 'url');
 
@@ -235,7 +235,7 @@ elseif($mybb->input['action'] == "details")
 	$form_container->output_row($lang->groupsuser."<em>*</em>",$lang->groupsuserdes, $form->generate_group_select('groups[]',$groups_selected, array('id' => 'groups[]', 'size' => 6, 'multiple' => 'multiple')), 'groups');
 	$form_container->output_row($lang->categorys."<em>*</em>", $lang->categorysdesnew, $category_select);
 	$form_container->end();
-	
+
 	$buttons[] = $form->generate_submit_button($lang->save);
 	$buttons[] = $form->generate_reset_button($lang->reset);
 	$form->output_submit_wrapper($buttons);
@@ -293,7 +293,7 @@ elseif($mybb->input['action'] == "delete")
 	}
 	$query = $db->simple_select("downloads", "*", "did=".$mybb->input['did']);
 	$download = $db->fetch_array($query);
-	$lang->succesdelete = $lang->sprintf($lang->deletesuccessdownload, $download['name']);
+	$lang->succesdelete = $lang->sprintf($lang->deletesuccessdownload, htmlspecialchars_uni($download['name']));
 	$db->query("DELETE FROM ".TABLE_PREFIX."downloads WHERE did='".intval($mybb->input['did'])."'");
 	$db->free_result($query);
 	flash_message($lang->succesdelete, 'success');
@@ -345,9 +345,9 @@ elseif($mybb->input['action'] == "viewimages")
 			echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 			echo $form->generate_hidden_field("images_num", $num);
 			$form_container = new FormContainer($lang->imagesofdownload);
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if ($i > $num) 
+				if ($i > $num)
 				{
 					break;
 				}
@@ -367,9 +367,9 @@ elseif($mybb->input['action'] == "viewimages")
 		}
 		elseif($mybb->input['saveimages'])
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if($i > intval($mybb->input['images_num'])) 
+				if($i > intval($mybb->input['images_num']))
 				{
 					break;
 				}
@@ -380,9 +380,9 @@ elseif($mybb->input['action'] == "viewimages")
 					admin_redirect("index.php?module=downloads/validate");
 				}
 			}
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if($i > intval($mybb->input['images_num'])) 
+				if($i > intval($mybb->input['images_num']))
 				{
 					break;
 				}
@@ -403,15 +403,15 @@ elseif($mybb->input['action'] == "viewimages")
 		flash_message($lang->emptyimagesview, 'error');
 		admin_redirect("index.php?module=downloads/validate");
 	}
-	$lang->imagesofdownload = $lang->sprintf($lang->imgsofdownload, $download['name']);
+	$lang->imagesofdownload = $lang->sprintf($lang->imgsofdownload, htmlspecialchars_uni($download['name']));
 	$form = new Form("index.php?module=downloads/validate&action=viewimages", "post");
 	echo $form->generate_hidden_field("did", $download['did']);
 	echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 	echo $form->generate_hidden_field("images_num", $num);
 	$form_container = new FormContainer($lang->imagesofdownload);
-	for($i = 1; ; $i++) 
+	for($i = 1; ; $i++)
 	{
-		if ($i > $num) 
+		if ($i > $num)
 		{
 			break;
 		}
@@ -430,7 +430,7 @@ elseif($mybb->input['action'] == "viewimages")
 				}
 				else
 				{
-					$images_width_height = "width=\"{$width}\" height=\"{$height}\"";	
+					$images_width_height = "width=\"{$width}\" height=\"{$height}\"";
 				}
 			}
 			$lang->imagenumerby = $lang->sprintf($lang->imagenumer, $i);
@@ -472,9 +472,9 @@ elseif($mybb->input['action'] == "viewlinks")
 			echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 			echo $form->generate_hidden_field("links_num", $num);
 			$form_container = new FormContainer($lang->linksofdownloadprin);
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if ($i > $num) 
+				if ($i > $num)
 				{
 					break;
 				}
@@ -494,9 +494,9 @@ elseif($mybb->input['action'] == "viewlinks")
 		}
 		elseif($mybb->input['savelinks'])
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if($i > intval($mybb->input['links_num'])) 
+				if($i > intval($mybb->input['links_num']))
 				{
 					break;
 				}
@@ -507,9 +507,9 @@ elseif($mybb->input['action'] == "viewlinks")
 					admin_redirect("index.php?module=downloads/validate");
 				}
 			}
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if($i > intval($mybb->input['links_num'])) 
+				if($i > intval($mybb->input['links_num']))
 				{
 					break;
 				}
@@ -530,15 +530,15 @@ elseif($mybb->input['action'] == "viewlinks")
 		flash_message($lang->emptylinksview, 'error');
 		admin_redirect("index.php?module=downloads/validate");
 	}
-	$lang->linksofdownloadpri = $lang->sprintf($lang->linksofdownload, $download['name']);
+	$lang->linksofdownloadpri = $lang->sprintf($lang->linksofdownload, htmlspecialchars_uni($download['name']));
 	$form = new Form("index.php?module=downloads/validate&action=viewlinks", "post");
 	echo $form->generate_hidden_field("did", $download['did']);
 	echo $form->generate_hidden_field("my_post_key", $mybb->post_code);
 	echo $form->generate_hidden_field("links_num", $num);
 	$form_container = new FormContainer($lang->linksofdownloadpri);
-	for($i = 1; ; $i++) 
+	for($i = 1; ; $i++)
 	{
-		if ($i > $num) 
+		if ($i > $num)
 		{
 			break;
 		}

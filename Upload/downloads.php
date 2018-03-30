@@ -3,15 +3,15 @@
  * MyBB: Downloads
  *
  * File: downloads.php
- * 
+ *
  * Authors: Vintagedaddyo, Edson Ordaz
  *
  * MyBB Version: 1.8
  *
  * Plugin Version: 2.0.3
- * 
+ *
  */
- 
+
 define("IN_MYBB", 1);
 define('THIS_SCRIPT', 'downloads.php');
 define('TABLE', 'downloads_');
@@ -66,9 +66,9 @@ if($mybb->input['newimages'])
 	$images = $mybb->input['images'];
 	if($mybb->request_method == "post")
 	{
-		for($i = 1; ; $i++) 
+		for($i = 1; ; $i++)
 		{
-			if ($i > intval($mybb->input['images'])) 
+			if ($i > intval($mybb->input['images']))
 			{
 				break;
 			}
@@ -80,9 +80,9 @@ if($mybb->input['newimages'])
 		}
 		if(!$errors)
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if ($i > intval($mybb->input['images'])) 
+				if ($i > intval($mybb->input['images']))
 				{
 					break;
 				}
@@ -91,7 +91,7 @@ if($mybb->input['newimages'])
 					"dcid" => intval($archive['category']),
 					"image" => $mybb->input['image_'.$i],
 					"orden" => $i
-				);	
+				);
 				$diid = $db->insert_id();
 				$db->insert_query("downloads_images", $insert);
 			}
@@ -114,9 +114,9 @@ if($mybb->input['newimages'])
 	{
 		$image_errors = inline_error($errors);
 	}
-	for($number = 1; ; $number++) 
+	for($number = 1; ; $number++)
 	{
-		if ($number > $mybb->input['images']) 
+		if ($number > $mybb->input['images'])
 		{
 			break;
 		}
@@ -163,9 +163,9 @@ elseif($mybb->input['newlinks'])
 	$did = intval($download['did']);
 	if($mybb->request_method == "post")
 	{
-		for($i = 1; ; $i++) 
+		for($i = 1; ; $i++)
 		{
-			if ($i > intval($mybb->input['urls'])) 
+			if ($i > intval($mybb->input['urls']))
 			{
 				break;
 			}
@@ -182,9 +182,9 @@ elseif($mybb->input['newlinks'])
 		}
 		if(!$errors)
 		{
-			for($i = 1; ; $i++) 
+			for($i = 1; ; $i++)
 			{
-				if ($i > intval($mybb->input['urls'])) 
+				if ($i > intval($mybb->input['urls']))
 				{
 					break;
 				}
@@ -195,7 +195,7 @@ elseif($mybb->input['newlinks'])
 					"text" => $db->escape_string($mybb->input['name_'.$i]),
 					"generate" => random_str(10),
 					"orden" => $i
-				);	
+				);
 				$duid = $db->insert_id();
 				$db->insert_query("downloads_urls", $insert_urls);
 			}
@@ -220,7 +220,7 @@ elseif($mybb->input['newlinks'])
 				$db->update_query("downloads", $edit_update,"did=".$download['did']);
 				$db->query("DELETE FROM ".TABLE_PREFIX."datacache WHERE title='downloads_cache'");
 				if($mybb->settings['downloads_validatedownloads'] == 1)
-				{				
+				{
 					redirect(THIS_SCRIPT, $lang->successcreatewaitval);
 				}
 				else
@@ -234,9 +234,9 @@ elseif($mybb->input['newlinks'])
 	{
 		$image_errors = inline_error($errors);
 	}
-	for($number = 1; ; $number++) 
+	for($number = 1; ; $number++)
 	{
-		if ($number > $mybb->input['urls']) 
+		if ($number > $mybb->input['urls'])
 		{
 			break;
 		}
@@ -280,7 +280,7 @@ elseif($mybb->input['newdownload'])
 	{
 		$query = $db->simple_select("downloads", "*", "name=\"".$mybb->input['name']."\"");
 		$download_name = $db->fetch_array($query);
-		
+
 		if($download_name['name'])
 		{
 			$errors[] = $lang->existdownloadname;
@@ -337,7 +337,7 @@ elseif($mybb->input['newdownload'])
 			$query_order = $db->simple_select("downloads", "orden", "category=\"".$dcid."\"", array('order_by' => 'orden', 'order_dir' => 'DESC'));
 			$orden = $db->fetch_array($query_order);
 			$insert = array(
-				"name" => $db->escape_string($mybb->input['name']),
+				"name" => $db->escape_string(htmlspecialchars_uni($mybb->input['name'])),
 				"orden" => intval(++$orden['orden']),
 				"uid" => intval($mybb->user['uid']),
 				"shortdesc" => $db->escape_string($mybb->input['shortdesc']),
@@ -378,7 +378,7 @@ elseif($mybb->input['newdownload'])
 			redirect("downloads.php?newlinks=".$download['did']."&urls=".$mybb->input['url']."&boximg=".$boximg."&images=".$numimages, $lang->downloadcreatelinks);
 		}
 	}
-	$name = $mybb->input['name'];
+	$name = htmlspecialchars_uni($mybb->input['name']);
 	$shortdesc = $mybb->input['shortdesc'];
 	$description = $mybb->input['description'];
 	$image = $mybb->input['image'];
@@ -568,7 +568,7 @@ elseif($mybb->input['category'])
 		}
 	}
 	if(!$archives_list)
-	{	
+	{
 		$archives_list = "<td class=\"trow1\" colspan=\"100\" align=\"center\">{$lang->dontdownloadtable}</td>";
 	}
 	if(!$colspan && !$tcatimage)
@@ -639,7 +639,7 @@ elseif($mybb->input['archive'])
 		{
 			$images_screenshots[$archive['did']][$image['orden']] = $image['image'];
 		}
-		for($i = 1; $i <= intval($archive['pics']); $i++) 
+		for($i = 1; $i <= intval($archive['pics']); $i++)
 		{
 			//resize image front
 			list($width, $height) = @getimagesize($images_screenshots[$archive['did']][$i]);
@@ -654,7 +654,7 @@ elseif($mybb->input['archive'])
 				}
 				else
 				{
-					$images_width_height = "width=\"{$width}\" height=\"{$height}\"";	
+					$images_width_height = "width=\"{$width}\" height=\"{$height}\"";
 				}
 			}
 			$images .= "<img src=\"".$images_screenshots[$archive['did']][$i]."\" {$images_width_height}/>  ";
@@ -662,7 +662,7 @@ elseif($mybb->input['archive'])
 		eval("\$screenshots = \"".$templates->get("downloads_archives_screenshots")."\";");
 	}
 	$db->update_query("downloads", array("views" => ++$archive['views']),"did=".$archive_id);
-	
+
 	//resize image front
 	list($width, $height) = @getimagesize($archive['image']);
 	if($width && $height)
@@ -676,7 +676,7 @@ elseif($mybb->input['archive'])
 		}
 		else
 		{
-			$front_width_height = "width=\"{$width}\" height=\"{$height}\"";	
+			$front_width_height = "width=\"{$width}\" height=\"{$height}\"";
 		}
 	}
 	if($archive['comments'] == 1)
@@ -823,4 +823,4 @@ function parse_text($text,$html,$bbcode,$smilies)
 }
 
 exit;
-?>	
+?>
