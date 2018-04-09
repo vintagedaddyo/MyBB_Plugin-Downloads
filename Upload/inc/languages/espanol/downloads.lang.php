@@ -95,5 +95,7 @@ $l['messages'] = "Mensajes";
 $l['reputation'] = "Reputaci&oacute;n";
 $l['register'] = "Registro";
 
+
 $l['newdownload'] = "Nueva descarga";
+
 ?>
