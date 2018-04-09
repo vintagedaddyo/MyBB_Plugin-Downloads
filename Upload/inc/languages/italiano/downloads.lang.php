@@ -95,11 +95,6 @@ $l['messages'] = "Posts";
 $l['reputation'] = "Reputazione";
 $l['register'] = "Registrato";
 
-<<<<<<< HEAD
-$l['newdownload'] = "Nuovo download";
-=======
-
 $l['newdownload'] = "Nuovo download";
 
->>>>>>> 15f894492908f82fce7b66ba7658c21abd9b571c
 ?>
