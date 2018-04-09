@@ -1,3 +1,8 @@
+Update Version 2.0.3 third
+
+	*minor changes to fix buttons on front-end.
+	*minot changes to adress some warnings that came about while using 7.2.4
+
 Update Version 2.0.3 second
 
 	*minor update simply to fix Italian language install issues yet again. Added French language and fixed minor issues with install lang file issue. Minor changes to some templates to correct the thread displaying oddly in 1.8.x. added download folder in images as I had forgotten to include that as before users added it manually and since it is needed I added it. Disabled one particular input as it was causing errors. Just a simple update to get the plugin working again, add further localization support and touch up other minor changes here and there.
