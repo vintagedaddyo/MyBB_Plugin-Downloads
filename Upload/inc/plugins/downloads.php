@@ -769,9 +769,8 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 	
 	$downloads_templates[] = array(
 		"title"		=> 'downloads_newdownload_button',
-		"template"	=> $db->escape_string('<div style="float: right">
-<a href="downloads.php?newdownload={$category[\'dcid\']}"><img src="images/newdownload.png" /></a>
-</div>
+		"template"	=> $db->escape_string('<div style="float:left;list-style-type:none;margin: 2px 2px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;">
+					<li><a href="downloads.php?newdownload={$category[\'dcid\']}"><img src="{$theme[\'imgdir\']}/downloads.png" alt="" title="" /> {$lang->newdownload}</a></li></div>
 <br />'),
 		"sid"		=> -1,
 		"version"	=> 1815,
@@ -958,8 +957,11 @@ by: {$username}
 	}
 	
 	require_once MYBB_ROOT."/inc/adminfunctions_templates.php";
-	find_replace_templatesets('header', '#{\$lang->toplinks_memberlist}</a></li>#', '{\$lang->toplinks_memberlist}</a></li><!-- Downloads -->
-					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/paperclip.png" alt="" title="" />Downloads</a></li><!-- /Downloads -->');
+	find_replace_templatesets('header', '#<navigation>
+				<br />#', '<navigation>
+				<br /><!-- Downloads -->
+				<div style="float:right;list-style-type:none;margin: 2px 2px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;">
+					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/download.png" alt="" title="" /> Downloads</a></li></div><!-- /Downloads -->');
 }
 
 function downloads_uninstall(){

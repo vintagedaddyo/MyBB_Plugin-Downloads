@@ -114,7 +114,7 @@ if(!$mybb->input['action'])
 	
 	echo "<div id=\"tab_download\">";
 	$explode = explode(",",$mybb->settings['downloads_groupscreatedownloads']);
-	$array_map = array_map(intval,$explode);
+	$array_map = array_map('intval',$explode);
 	$form_container = new FormContainer($lang->general);
 	$form_container->output_row($lang->activedownloads."<em>*</em>",$lang->activedownloadsdes, $form->generate_yes_no_radio('activeplug',$mybb->settings['downloads_active'], array('id' => 'activeplug')), 'activeplug');
 	$form_container->output_row($lang->createdownsusers."<em>*</em>",$lang->createdownsusersdes, $form->generate_yes_no_radio('createdownloads',$mybb->settings['downloads_usercreatedownloads'], array('id' => 'createdownloads')), 'createdownloads');
