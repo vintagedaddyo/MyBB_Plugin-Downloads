@@ -94,7 +94,7 @@ if(!$mybb->input['action'])
 		}
 		$lang->deletepopupcategory = $lang->sprintf($lang->deletepopupcategorys, $category['name']);
 		$table->construct_cell("<img src=\"../".$category['ficon']."\" />", array("class" => "align_center"));
-		$table->construct_cell("<a href=\"index.php?module=downloads/category&action=edit&amp;dcid=".$category['dcid']."\"><strong>".$category[name]."</strong></a><br /><span class='smalltext'>".$category['description']."</span>");
+		$table->construct_cell("<a href=\"index.php?module=downloads/category&action=edit&amp;dcid=".$category['dcid']."\"><strong>".$category['name']."</strong></a><br /><span class='smalltext'>".$category['description']."</span>");
 		$table->construct_cell("<a href=\"index.php?module=downloads/category&action=activate&state=".$mod."&dcid=".$category['dcid']."&my_post_key={$mybb->post_code}\"><img src=\"styles/default/images/icons/".$state."\" title=\"".$title."\" /></a>",array("class" => "align_center"));
 		$table->construct_cell("<input type=\"text\" value=\"".$category['orden']."\" readonly='readonly' class=\"text_input align_center\" style=\"width: 80%; font-weight: bold;\" />", array("class" => "align_center"));
 		$popup = new PopupMenu("dcid_{$category['dcid']}", $lang->options);

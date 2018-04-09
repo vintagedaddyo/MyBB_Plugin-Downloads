@@ -95,4 +95,5 @@ $l['messages'] = "Des postes";
 $l['reputation'] = "Réputation";
 $l['register'] = "Inscrit";
 
+$l['newdownload'] = "Nouveau téléchargement";
 ?>
