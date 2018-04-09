@@ -1006,7 +1006,7 @@ background-color: green;
 color: #0072BC;
 }
 </style>
-				<div id ="downloads"  style="float:left;list-style-type:none;margin: 2px 6px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;">
+				<div id ="downloads"  style="position:relative;list-style-type:none;margin: 2px 6px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;z-index:9998;">
 					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/download.png" alt="" title="" /> {$lang->downloads}</a></li></div><!-- /Downloads -->');
 }
 

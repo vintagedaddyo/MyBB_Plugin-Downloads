@@ -1,7 +1,7 @@
 Update Version 2.0.3 third
 
-	*minor changes to fix buttons on front-end.
-	*minot changes to adress some warnings that came about while using 7.2.4
+    *minor changes to fix buttons on front-end.
+    *minot changes to adress some warnings that came about while using 7.2.4
 
 Update Version 2.0.3 second
 
