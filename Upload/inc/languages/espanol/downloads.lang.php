@@ -95,4 +95,11 @@ $l['messages'] = "Mensajes";
 $l['reputation'] = "Reputaci&oacute;n";
 $l['register'] = "Registro";
 
+<<<<<<< HEAD
+$l['newdownload'] = "Nueva descarga";
+=======
+
+$l['newdownload'] = "Nueva descarga";
+
+>>>>>>> 15f894492908f82fce7b66ba7658c21abd9b571c
 ?>

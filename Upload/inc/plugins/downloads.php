@@ -19,7 +19,7 @@ if(!defined("IN_MYBB"))
 
 $plugins->add_hook("datahandler_post_insert_thread", "download_count_threads");
 $plugins->add_hook("class_moderation_delete_thread_start", "download_deletenum_thread");
-
+$plugins->add_hook("global_start", "downloads_is_installed");
 
 function downloads_info()
 {
@@ -47,7 +47,10 @@ function downloads_info()
 
 
 function downloads_is_installed(){
-	global $mybb, $db;
+	global $mybb, $db, $lang;
+
+    $lang->load("downloads");
+
   	if($db->table_exists("downloads"))
 	{
 		return true;
@@ -172,7 +175,7 @@ function downloads_install()
 			"title"			=> $lang->activedownloads,
 			"description"	=> $lang->activedownloadsdes,
 			"optionscode"	=> "yesno",
-			"value"			=> 0,
+			"value"			=> 1,
 			"disporder"		=> 1,
 			"gid"			=> 0,
 		),
@@ -181,7 +184,7 @@ function downloads_install()
 			"title"			=> $lang->createdownsusers,
 			"description"	=> $lang->createdownsusersdes,
 			"optionscode"	=> "yesno",
-			"value"			=> 0,
+			"value"			=> 1,
 			"disporder"		=> 2,
 			"gid"			=> 0,
 		),
@@ -769,9 +772,30 @@ You are downloading file: <a href="downloads.php?archive={$archive[\'did\']}" />
 	
 	$downloads_templates[] = array(
 		"title"		=> 'downloads_newdownload_button',
-		"template"	=> $db->escape_string('<div style="float: right">
-<a href="downloads.php?newdownload={$category[\'dcid\']}"><img src="images/newdownload.png" /></a>
-</div>
+		"template"	=> $db->escape_string('
+<style>
+#new_downloads ul {
+list-style-type: none;
+overflow: hidden;
+}
+
+#new_downloads li a {
+display: block;
+color: #333;
+text-align: center;
+text-decoration: none;
+}
+
+#new_downloads li b {
+background-color: green;
+}
+
+#new_downloads li a:hover {
+color: #0072BC;
+}
+</style>
+<div id="new_downloads" style="float:left;list-style-type:none;margin: 2px 2px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;">
+					<li><a href="downloads.php?newdownload={$category[\'dcid\']}"><img src="{$theme[\'imgdir\']}/downloads.png" alt="" title="" /> {$lang->newdownload}</a></li></div>
 <br />'),
 		"sid"		=> -1,
 		"version"	=> 1815,
@@ -958,8 +982,32 @@ by: {$username}
 	}
 	
 	require_once MYBB_ROOT."/inc/adminfunctions_templates.php";
-	find_replace_templatesets('header', '#{\$lang->toplinks_memberlist}</a></li>#', '{\$lang->toplinks_memberlist}</a></li><!-- Downloads -->
-					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/paperclip.png" alt="" title="" />Downloads</a></li><!-- /Downloads -->');
+	find_replace_templatesets('header', '#<navigation>
+				<br />#', '<navigation>
+				<br /><!-- Downloads -->
+<style>
+#downloads ul {
+list-style-type: none;
+overflow: hidden;
+}
+
+#downloads li a {
+display: block;
+color: #333;
+text-align: center;
+text-decoration: none;
+}
+
+#downloads li b {
+background-color: green;
+}
+
+#downloads li a:hover {
+color: #0072BC;
+}
+</style>
+				<div id ="downloads"  style="float:right;list-style-type:none;margin: 2px 2px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;">
+					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/download.png" alt="" title="" /> {$lang->downloads}</a></li></div><!-- /Downloads -->');
 }
 
 function downloads_uninstall(){
