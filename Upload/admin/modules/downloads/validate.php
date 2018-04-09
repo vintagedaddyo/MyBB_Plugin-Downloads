@@ -68,7 +68,7 @@ if(!$mybb->input['action'])
 		$user = get_user($downloads['uid']);
 		$username = format_name($user['username'], $user['usergroup'], $user['displaygroup']);
 		$username = build_profile_link($username, $user['uid'], "_blank");
-		$table->construct_cell("<a href=\"index.php?module=downloads/validate&action=details&amp;did=".$downloads['did']."\"><strong>".htmlspecialchars_uni($downloads[name])."</strong></a>");
+		$table->construct_cell("<a href=\"index.php?module=downloads/validate&action=details&amp;did=".$downloads['did']."\"><strong>".htmlspecialchars_uni($downloads['name'])."</strong></a>");
 		$table->construct_cell($username,array("class" => "align_center"));
 		$table->construct_cell($downloads['pics'],array("class" => "align_center"));
 		$table->construct_cell("<input type=\"text\" value=\"".$downloads['orden']."\" readonly='readonly' class=\"text_input align_center\" style=\"width: 80%; font-weight: bold;\" />", array("class" => "align_center"));
@@ -218,7 +218,7 @@ elseif($mybb->input['action'] == "details")
 	$groups = explode(",",$download['groups']);
 	$groups_selected = array_map(intval,$groups);
 	$form = new Form("index.php?module=downloads/validate&action=details", "post");
-	echo $form->generate_hidden_field("did", $download[did]);
+	echo $form->generate_hidden_field("did", $download['did']);
 	$form_container = new FormContainer($lang->edit." ".htmlspecialchars_uni($download['name']));
 	$form_container->output_row($lang->name."<em>*</em>",$lang->name_des, $form->generate_text_box('name',$name, array('id' => 'name')), 'name');
 	$form_container->output_row($lang->shortdescription."<em>*</em>", $lang->shortdescriptiondes, $form->generate_text_box('shortdesc',$shortdesc,array('id' => 'shortdesc',)), 'shortdesc');

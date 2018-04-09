@@ -118,7 +118,7 @@ if(!$mybb->input['action'] && !$mybb->input['customimages'] && !$mybb->input['li
 				$popup_state = $lang->activar;
 			}
 			$lang->deletepopup = $lang->sprintf($lang->deletepop, $downloads['name']);
-			$table->construct_cell("<a href=\"index.php?module=downloads/archives&action=edit&amp;did=".$downloads['did']."\"><strong>".htmlspecialchars_uni($downloads[name])."</strong></a>");
+			$table->construct_cell("<a href=\"index.php?module=downloads/archives&action=edit&amp;did=".$downloads['did']."\"><strong>".htmlspecialchars_uni($downloads['name'])."</strong></a>");
 			$table->construct_cell($downloads['pics'],array("class" => "align_center"));
 			$table->construct_cell("<a href=\"index.php?module=downloads/archives&action=activate&state=".$mod."&did=".$downloads['did']."&my_post_key={$mybb->post_code}\"><img src=\"styles/default/images/icons/".$state."\" title=\"".$title."\" /></a>",array("class" => "align_center"));
 			$table->construct_cell("<input type=\"text\" value=\"".$downloads['orden']."\" readonly='readonly' class=\"text_input align_center\" style=\"width: 80%; font-weight: bold;\" />", array("class" => "align_center"));
@@ -325,9 +325,9 @@ elseif($mybb->input['action'] == "edit")
 	}
 	$category_select .= "</select>";
 	$groups = explode(",",$download['groups']);
-	$groups_selected = array_map(intval,$groups);
+	$groups_selected = array_map('intval',$groups);
 	$form = new Form("index.php?module=downloads/archives&action=edit", "post");
-	echo $form->generate_hidden_field("did", $download[did]);
+	echo $form->generate_hidden_field("did", $download['did']);
 	$form_container = new FormContainer($lang->edit." ".htmlspecialchars_uni($download['name']));
 	$form_container->output_row($lang->name."<em>*</em>",$lang->name_des, $form->generate_text_box('name',$name, array('id' => 'name')), 'name');
 	$form_container->output_row($lang->shortdescription."<em>*</em>", $lang->shortdescriptiondes, $form->generate_text_box('shortdesc',$shortdesc,array('id' => 'shortdesc',)), 'shortdesc');
