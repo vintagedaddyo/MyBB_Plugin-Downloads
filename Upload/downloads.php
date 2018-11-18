@@ -278,7 +278,7 @@ elseif($mybb->input['newdownload'])
 	add_breadcrumb($lang->newdownloads);
 	if($mybb->request_method == "post")
 	{
-		$query = $db->simple_select("downloads", "*", "name=\"".$mybb->input['name']."\"");
+		$query = $db->simple_select("downloads", "*", "name=\"".htmlspecialchars_uni($mybb->input['name'])."\"");
 		$download_name = $db->fetch_array($query);
 
 		if($download_name['name'])
