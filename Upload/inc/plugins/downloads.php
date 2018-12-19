@@ -980,10 +980,13 @@ by: {$username}
 	{
 		$db->insert_query("templates", $insert_templates);
 	}
-	
-	require_once MYBB_ROOT."/inc/adminfunctions_templates.php";
-	find_replace_templatesets('header', '#<navigation>
-				<br />#', '<navigation>
+}
+
+function downloads_activate()
+{
+	require_once MYBB_ROOT . '/inc/adminfunctions_templates.php';
+
+	find_replace_templatesets("header", "#<navigation(.*?)<br />#ism", '<navigation>
 				<br /><!-- Downloads -->
 <style>
 #downloads ul {
@@ -1007,8 +1010,16 @@ color: #0072BC;
 }
 </style>
 				<div id ="downloads"  style="position:relative;list-style-type:none;margin: 2px 6px 6px 2px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:#F5F5F5 url(images/buttons_bg.png) repeat-x;padding: 3px 8px;font-family:Tahoma,Verdana,Arial,Sans-Serif;font-size:16px;border:1px solid #bbb;outline:0;display:inline-block;z-index:9998;">
-					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/download.png" alt="" title="" /> {$lang->downloads}</a></li></div><!-- /Downloads -->');
+					<li><a href="{\$mybb->settings[\'bburl\']}/downloads.php"><img src="{\$theme[\'imgdir\']}/download.png" alt="" title="" /> {$lang->downloads}</a></li></div><!-- /Downloads -->', 0);
 }
+
+
+function downloads_deactivate()
+{
+	require_once MYBB_ROOT."/inc/adminfunctions_templates.php";
+
+	find_replace_templatesets('header', '#\<!--\sDownloads\s--\>(.+)\<!--\s/Downloads\s--\>#is', '', 0);
+}	
 
 function downloads_uninstall(){
 	global $db;
